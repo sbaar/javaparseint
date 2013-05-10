@@ -11,7 +11,7 @@ public class Main{
 		if (neg && (str.length() == 1)) 
 			throw new NumberFormatException("Can't parse string " + str+ " to Int");
 		String numbers = neg ? str.substring(1) : str;
-		int max = neg ? Integer.MIN_VALUE  :Integer.MAX_VALUE;
+		int max = neg ? Integer.MIN_VALUE  :Integer.MAX_VALUE * -1;
 		int d;
 		int sum = 0;
 		
@@ -24,9 +24,9 @@ public class Main{
 			sum *=10;
 			if (sum < max + d)
 				throw new NumberFormatException("Int overflow parsing string " + str);
-			sum +=d;
+			sum -=d;
 		}
-		return sum * (neg ? -1 : 1);
+		return sum * (neg ? 1 : -1);
 		
 		
 	
@@ -40,6 +40,9 @@ public class Main{
 		System.out.println("parsing 2^31 - 1  =2147483647 = " + parseInt("2147483647") + " actual: " +  Integer.parseInt("2147483647"));
 		
 		try {System.out.println("parsing -2147483649 = " + parseInt("-2147483649"));}
+		catch (Exception e) {System.out.println(e.getMessage());}
+		
+		try {System.out.println("parsing 2147483648 = " + parseInt("2147483648"));}
 		catch (Exception e) {System.out.println(e.getMessage());}
 		
 		try {System.out.println("parsing -01A23 = " + parseInt("-01A23"));}
